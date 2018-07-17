@@ -1,0 +1,24 @@
+{
+  "name": "myapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^0.11.1",
+    "react": "^16.4.1"
+  },
+  "scripts": {
+    "dev": "cross-env BROWSER=none HOST=127.0.0.1 port=2000 roadhog server ",
+    "lint": "eslint --fix --ext .js src",
+    "build": "roadhog build",
+    "build:dll": "roadhog buildDll",
+    "build:new": "node version && roadhog build",
+    "start": "webpack --config webpack.config.js && cd src && http-server -a 0.0.0.0 -p 8000 -i True"
+  },
+  "devDependencies": {
+    "webpack": "^4.16.1",
+    "webpack-cli": "^3.0.8"
+  }
+}
