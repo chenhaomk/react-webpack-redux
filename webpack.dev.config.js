@@ -17,16 +17,23 @@ const config = {
   },
   module: {
     rules: [{
-        test: /\.js$/,
-        loader: "babel-loader",
-        include: path.resolve(__dirname, 'src'),
-        exclude: [
-          path.resolve(__dirname, "node_modules")
-        ],
-        options: {
-          presets: ["react"],
-        },
+      test: /\.js$/,
+      loader: "babel-loader",
+      include: path.resolve(__dirname, 'src'),
+      exclude: [
+        path.resolve(__dirname, "node_modules")
+      ],
+      options: {
+        presets: ["react"],
+      },
     }]
+  },
+  resolve: {
+    alias: {
+      pages: path.join(__dirname, 'src/pages'),
+      component: path.join(__dirname, 'src/component'),
+      router: path.join(__dirname, 'src/router'),
+    }
   },
   devServer: {
     port: 8080,
