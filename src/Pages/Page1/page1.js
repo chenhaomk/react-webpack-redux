@@ -1,11 +1,26 @@
-import React,{Component} from 'react';
+import React, {Component} from 'react';
 
-class Page1 extends React.Component {
-    constructor (props) {
-        super (props)
+export default class Home extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            count: 0
+        }
     }
-    render () {
-        return <div>Page</div>
+
+    _handleClick() {
+        this.setState({
+            count: ++this.state.count
+        });
+    }
+
+    render() {
+        return (
+            <div>
+                this is home~<br/>
+                当前计数：{this.state.count}<br/>
+                <button onClick={() => this._handleClick()}>自增</button>
+            </div>
+        )
     }
 }
-export default Page1

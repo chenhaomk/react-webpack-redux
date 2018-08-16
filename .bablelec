@@ -5,6 +5,9 @@
      "stage-0"
    ],
    "plugins": [
-     "react-hot-loader/babel"
+     "react-hot-loader/babel",
+     "dynamic-import-webpack",
+     ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": "css" }],
+     "syntax-dynamic-import"
    ]
  }

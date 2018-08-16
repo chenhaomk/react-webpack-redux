@@ -1,44 +1,70 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch, Link, IndexRoute } from 'react-router-dom';
 
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import Loadable from 'react-loadable';
 
-import Bundle from './bundle';
-
-import Home from 'bundle-loader?lazy&name=home!pages/Home/home';
-import Page1 from 'bundle-loader?lazy&name=page1!pages/Page1/page1';
-import Counter from 'bundle-loader?lazy&name=counter!pages/Counter/counter';
-import UserInfo from 'bundle-loader?lazy&name=userInfo!pages/UserInfo/userInfo';
+import { LocaleProvider } from 'antd';
+import zhCN from 'antd/lib/locale-provider/zh_CN';
 
 const Loading = function () {
-    return <div>Loading...</div>
+  return <div>Loading...</div>
 };
 
-const createComponent = (component) => (props) => (
-    <Bundle load={component}>
-        {
-            (Component) => Component ? <Component {...props} /> : <Loading />
-        }
-    </Bundle>
-);
+const routers = [
+  {
+    path: '/page',
+    component: Loadable({
+      loader: () => import('pages/Page1/page1'),
+      loading: Loading,
+    })
+
+  }, {
+    path: '/counter',
+    component: Loadable({
+      loader: () => import('pages/Counter/counter'),
+      loading: Loading,
+    })
+
+  }, {
+    path: '/userInfo',
+    component: Loadable({
+      loader: () => import('pages/UserInfo/userInfo'),
+      loading: Loading,
+    })
+  }
+]
 
 
-const getRouter = () => (
+class Dashboard extends React.Component {
+  render() {
+    return <div>Dashboard</div>
+  }
+}
+const getRouter = () => {
+  return (
     <Router>
+      <LocaleProvider locale={zhCN}>
         <div>
-            <ul>
-                <li><Link to="/">首页</Link></li>
-                <li><Link to="/page1">Page1</Link></li>
-                <li><Link to="/counter">Counter</Link></li>
-                <li><Link to="/userinfo">UserInfo</Link></li>
-            </ul>
-            <Switch>
-                <Route exact path="/" component={createComponent(Home)} />
-                <Route path="/page1" component={createComponent(Page1)} />
-                <Route path="/counter" component={createComponent(Counter)} />
-                <Route path="/userinfo" component={createComponent(UserInfo)} />
-            </Switch>
+          <ul>
+            <li><Link to="/">首页</Link></li>
+            <li><Link to="/page">Page1</Link></li>
+            <li><Link to="/counter">Counter</Link></li>
+            <li><Link to="/userinfo">UserInfo</Link></li>
+          </ul>
+          <Switch>
+            {
+              routers.map(({ path, component }, key) => (
+                <Route key={key}
+                  path={path}
+                  component={component}
+                />
+              ))
+            }
+          </Switch>
         </div>
+      </LocaleProvider>
     </Router>
-);
+  )
+}
 
 export default getRouter;

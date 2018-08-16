@@ -29,7 +29,18 @@ const config = {
       ],
       options: {
         presets: ["react"],
+        // plugins: ['dynamic-import-webpack'] // import()插件
+        plugins: ['syntax-dynamic-import']
       },
+    }, {
+      test: /\.less$/,
+      use: [{
+        loader: "style-loader" // creates style nodes from JS strings
+      }, {
+        loader: "css-loader" // translates CSS into CommonJS
+      }, {
+        loader: "less-loader" // compiles Less to CSS
+      }]
     }]
   },
   resolve: {
@@ -46,10 +57,13 @@ const config = {
     host: '0.0.0.0'
   },
   devtool: 'inline-source-map',
-  plugins: [new HtmlWebpackPlugin({
-    filename: 'index.html',
-    template: path.join(__dirname, 'src/index.html')
-  })],
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: path.join(__dirname, 'src/index.html')
+    }),
+    
+  ],
 }
 
 module.exports = config

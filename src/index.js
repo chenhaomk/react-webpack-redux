@@ -11,21 +11,21 @@ renderWithHotReload(getRouter());
 
 /*热更新*/
 if (module.hot) {
-    module.hot.accept('./router/router', () => {
-        const getRouter = require('./routers/router').default;
-        renderWithHotReload(getRouter());
-    });
+  module.hot.accept('./router/router', () => {
+    const getRouter = require('./routers/router').default;
+    renderWithHotReload(getRouter());
+  });
 }
 
 function renderWithHotReload(RootElement) {
-    ReactDom.render(
-        <AppContainer>
-            <Provider store={store}>
-                {RootElement}
-            </Provider>
-        </AppContainer>,
+  ReactDom.render(
+    <AppContainer>
+      <Provider store={store}>
+        {RootElement}
+      </Provider>
+    </AppContainer>,
 
-        
-        document.getElementById('app')
-    )
+
+    document.getElementById('app')
+  )
 }
