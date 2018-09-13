@@ -144,7 +144,7 @@ class Hello extends React.Component {
 }
 export default Hello;
 ```  
-src/index.js引入Hello组件  
+src/index.js引入Hello 组件  
 ```
 import React from 'react';
 import ReactDom from 'react-dom';
