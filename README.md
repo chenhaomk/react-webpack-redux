@@ -5,7 +5,7 @@ ___
 2.[webpck](#webpack)  
 3.[babel](#bable)  
 4.[react](#react)  
-5.[命令优化](#cli)  
+5.[命令优化](#命令优化)  
 6.[react-router](#router)  
 7.[webpack-dev-server](#server)  
 8.[模块热替换](#hmr)
@@ -278,7 +278,7 @@ ___
 ![avatar](/pubilc/1536990434(1).jpg)  
 说明react-router起作用了。  
 这儿```contentBase```是指URL的根目录，更多```webpack-dev-server```配置：https://www.webpackjs.com/guides/development/#%E4%BD%BF%E7%94%A8-webpack-dev-server  
-### <span id='hmr'></span>模块热替换 
+### <span id='hmr'>模块热替换</span>
 ___
 到目前，当我们修改代码的时候，浏览器会自动刷新，不信你可以去试试。  
   
