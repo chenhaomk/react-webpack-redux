@@ -278,10 +278,10 @@ ___
 ![avatar](/pubilc/1536990434(1).jpg)  
 说明react-router起作用了。  
 这儿```contentBase```是指URL的根目录，更多```webpack-dev-server```配置：https://www.webpackjs.com/guides/development/#%E4%BD%BF%E7%94%A8-webpack-dev-server  
-### <span id='hmr'>模块热替换</span>  
+### <span id='hmr'></span>模块热替换 
 ___
 到目前，当我们修改代码的时候，浏览器会自动刷新，不信你可以去试试。  
   
 我相信看这个教程的人，应该用过别人的框架。我们在修改代码的时候，浏览器不会刷新，只会更新自己修改的那一块。我们也要实现这个效果  
   
-我们看下[webpack模块热替换](https://webpack.docschina.org/guides/hot-module-replacement)教程。
+我们看下[webpack模块热替换](https://www.webpackjs.com/guides/development/#%E4%BD%BF%E7%94%A8-webpack-dev-server)教程。
