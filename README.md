@@ -1,14 +1,14 @@
 ## 从零搭建react+react-router+webpack+redux应用~持续更新中...
 ___
 ### 目录
-1.[init项目](#init)  
+1.[init项目](#init项目)  
 2.[webpck](#webpack)  
 3.[babel](#bable)  
 4.[react](#react)  
 5.[命令优化](#命令优化)  
-6.[react-router](#router)  
-7.[webpack-dev-server](#server)  
-8.[模块热替换](#hmr)
+6.[react-router](#react-router)  
+7.[webpack-dev-server](#webpack-dev-server)  
+8.[模块热替换](#模块热替换)
 ___
 ### <span id='init'>init项目</span>  
 ___
