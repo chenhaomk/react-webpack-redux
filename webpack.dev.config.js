@@ -62,7 +62,7 @@
 //       filename: 'index.html',
 //       template: path.join(__dirname, 'src/index.html')
 //     }),
-    
+
 //   ],
 // }
 
@@ -70,9 +70,9 @@
 const path = require('path');
 const config = {
   mode: "development",
-  entry: path.join(__dirname,'src/index.js'),
+  entry: path.join(__dirname, 'src/index.js'),
   output: {
-    path: path.join(__dirname,'./dist'),
+    path: path.join(__dirname, './dist'),
     filename: 'bundle.js'
   },
   module: {
@@ -86,6 +86,9 @@ const config = {
         include: path.join(__dirname, 'src')
       }
     ]
+  },
+  devServer: {
+    contentBase: path.join(__dirname, './dist')
   }
 }
 module.exports = config;

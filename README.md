@@ -1,4 +1,4 @@
-## 从零搭建react+react-router+webpack+redux应用
+## 从零搭建react+react-router+webpack+redux应用~持续更新中...
 ___
 ### 目录
 1.[init项目](#init)  
@@ -6,8 +6,9 @@ ___
 3.[babel](#bable)  
 4.[react](#react)  
 5.[命令优化](#cli)  
-6.[react-reouter](#jump)  
-7.[webpack-dev-server](#jump)  
+6.[react-router](#router)  
+7.[webpack-dev-server](#server)  
+8.[模块热替换](#hmr)
 ___
 ### <span id='init'>init项目</span>  
 ___
@@ -167,3 +168,120 @@ ___
 ```  
 现在我们打包只需要执行npm run start  
 参考地址:http://www.ruanyifeng.com/blog/2016/10/npm_scripts.html  
+### <react id='router'>react-router</span>  
+___
+```npm i react-router-dom --save-dev```  
+新建router文件  
+```
+cd src
+mkdir router && touch router/router.js
+```  
+新建pages文件夹,添加Home,Page1页面  
+```
+cd src
+mkdir pages
+cd pages
+mkdir Home && touch Home/Home.js
+mkdir Page1 &&  touch Page1/Page1.js
+```
+src/pages/Home/Home.js添加  
+```
+import React,{Component} from 'react';
+
+class Home extends React.Component {
+    render () {
+        return (
+            <div>Home</div>
+        )
+    }
+}
+export default Home;
+```  
+scr/pages/Page1/Page1.js添加  
+```
+import React,{Component} from 'react';
+
+class Page1 extends React.Component {
+    render () {
+        return (
+            <div>page1</div>
+        )
+    }
+}
+export default Page1;
+```  
+src/router/router.js添加  
+```
+import React from 'react';
+
+import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
+
+import Home from '../pages/Home/Home';
+import Page1 from '../pages/Page1/Page1';
+
+
+const getRouter = () => (
+    <Router>
+        <div>
+            <ul>
+                <li><Link to="/">首页</Link></li>
+                <li><Link to="/page1">Page1</Link></li>
+            </ul>
+            <Switch>
+                <Route exact path="/" component={Home}/>
+                <Route path="/page1" component={Page1}/>
+            </Switch>
+        </div>
+    </Router>
+);
+
+export default getRouter;
+```  
+修改src/index.js文件,引入路由组件  
+```
+import React from 'react';
+import ReactDom from 'react-dom';
+
+import getRouter from './router/router';
+
+ReactDom.render(
+    getRouter(), document.getElementById('app'));
+```  
+现在执行```npm run start```命令，刷新dist/index.html文件就能看到  
+![avatar](/pubilc/1536988002(1).jpg)  
+我们发现点击‘首页’和‘Page1’没有反应。不要惊慌，这是正常的.  
+我们之前一直用这个路径访问index.html，类似这样：file:///D:/my%20project/react-webpack-redux/dist/index.html。
+这种路径了，不是我们想象中的路由那样的路径http://localhost:3000~我们需要配置一个简单的WEB服务器，指向index.html。~有下面两种方法来实现  
+&ensp;&ensp;1.Nginx, Apache, IIS等配置启动一个简单的的WEB服务器。  
+&ensp;&ensp;2.使用webpack-dev-server来配置启动WEB服务器。  
+react-router参考资料:http://www.jianshu.com/p/e3adc9b5f75c  
+### <span id='server'>webpack-dev-server</span>  
+___
+安装```npm install --save-dev webpack-dev-server@3```  
+修改webpack.dev.config.js文件   
+```
+ devServer: {
+    contentBase: path.join(__dirname, './dist')
+}
+```  
+修改package.json文件
+```
+"start": "webpack --config webpack.dev.config.js"
+```  
+改为  
+```
+"start": "webpack-dev-server --config webpack.dev.config.js"
+```  
+现在执行命令```npm run start```，打开浏览器,访问:http://localhost:8080，就能看到  
+![avatar](/pubilc/1536990411(1).jpg)  
+点击Page1:  
+![avatar](/pubilc/1536990434(1).jpg)  
+说明react-router起作用了。  
+这儿```contentBase```是指URL的根目录，更多```webpack-dev-server```配置：https://www.webpackjs.com/guides/development/#%E4%BD%BF%E7%94%A8-webpack-dev-server  
+### <span id='hmr'>模块热替换</span>  
+___
+到目前，当我们修改代码的时候，浏览器会自动刷新，不信你可以去试试。  
+  
+我相信看这个教程的人，应该用过别人的框架。我们在修改代码的时候，浏览器不会刷新，只会更新自己修改的那一块。我们也要实现这个效果  
+  
+我们看下[webpack模块热替换](https://webpack.docschina.org/guides/hot-module-replacement)教程。
